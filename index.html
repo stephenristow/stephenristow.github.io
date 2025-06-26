@@ -81,13 +81,16 @@
       border-radius: 8px;
       margin-bottom: 20px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
     }
 
     .project-card:hover {
       transform: scale(1.02);
     }
 
-
+    .source-btn:hover {
+      background-color: #005f99;
+    }
 
     .resume-grid {
       display: flex;
@@ -114,13 +117,13 @@
 
   <h2>Projects</h2>
   <div class="project-grid">
-    <div class="project-card">
+    <a href="https://pawsport-production.up.railway.app/" target="_blank" class="project-card">
       <span class="project-title">PawsPort — A social network for dog owners</span>
-      <div class="project-links">
-        <a href="https://pawsport-production.up.railway.app/" target="_blank">Live Demo</a> |
-        <a href="https://github.com/stephenristow/pawsport" target="_blank">Source Code</a>
-      </div>
-    </div>
+      <button class="source-btn" onclick="event.stopPropagation(); window.open('https://github.com/stephenristow/pawsport', 'blank');">
+        Source Code
+      </button>
+    </a>
+    <a href="https://github.com/stephenristow/pawsport" target="_blank">Source Code</a>
     <!-- Add more projects here as needed -->
     <div class="project-card">
       <span class="project-title">Gymothy — A workout tracker for strength training</span>
