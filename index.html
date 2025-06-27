@@ -67,8 +67,60 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 0px 20px;
+      padding: 80px 40px;
       border-bottom: 1px solid #ddd;
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      width: 100%;
+      padding: 60px;
+      box-sizing: border-box;
+    }
+
+    .scroll-section--hero {
+      height: 80vh;
+      background-color: #f9f9f9;
+      position: relative;
+    }
+
+    .hero-left, .hero-right {
+      flex: 1;
+      max-width: 50%;
+    }
+
+    .hero-left {
+      padding-right: 40px;
+      color: #fff;
+    }
+
+    .hero-left h1 {
+      font-size: 3em;
+      line-height: 1.2;
+    }
+
+    .hero-left .dot {
+      color: #caffbf;
+    }
+
+    .hero-left p {
+      font-size: 1.2em;
+      margin: 1em 0;
+    }
+
+    .hero-highlights {
+      font-size: 0.95em;
+      color: #cfd8dc;
+    }
+
+    .hero-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .scroll-section:nth-child(odd) {
@@ -134,11 +186,17 @@
   </style>
 </head>
 <body>
-  <section class="scroll-section">
-    <h1>Hi, I'm Stephen Ristow</h1>
-    <p>I'm a developer building full-stack web applications.</p>
+  <section class="scroll-section scroll-section--hero">
+    <div class="hero-grid">
+        <div class="hero-left">
+          <h1>Hi, I'm Stephen Ristow</h1>
+          <p>I'm a developer building full-stack web applications.</p>
+        </div>
+        <div class="hero-right">
+        </div>
+    </div>
   </section>
-  
+
   <section class="scroll-section">
     <h2>Live Demos</h2>
     <div class="project-grid">
@@ -149,7 +207,7 @@
         </button>
       </a>
     </div>
-    
+
     <h2>Source Code Only</h2>
     <div class="project-grid">
       <a href="https://github.com/stephenristow/Gymothy" target="_blank" class="project-card">
