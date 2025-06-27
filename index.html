@@ -190,7 +190,7 @@
   const wheelThreshold = 30; 
   
   function scrollToSection(index) {
-    if (index < 0 || index >= totalSections) return;
+    if (index < 0 || index >= totalSections || isScrolling) return;
     isScrolling = true;
     currentSection = index;
     window.scrollTo({
@@ -202,8 +202,11 @@
   }
   
   window.addEventListener('wheel', (e) => {
-    if (isScrolling) return;
+    if (isScrolling) 
+    e.preventDefault();
+    return;
   
+    
     const delta = e.deltaY;
     if (delta > 0) {
       scrollToSection(currentSection + 1);
@@ -214,7 +217,9 @@
   
 
   window.addEventListener('keydown', (e) => {
-    if (isScrolling) return;
+    if (isScrolling) 
+    e.preventDefault();
+    return;
   
     if (e.key === 'ArrowDown') {
       scrollToSection(currentSection + 1);
@@ -222,6 +227,6 @@
       scrollToSection(currentSection - 1);
     }
   });
-  
+
   </script>
   
