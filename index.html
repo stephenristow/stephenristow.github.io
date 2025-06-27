@@ -20,8 +20,12 @@
       margin: 0;
       font-family: 'Ubuntu', sans-serif;
       line-height: 1.6;
-      color: #333;
-      background-color: #f9f9f9;
+      color: #fffffe;
+      background-color: #16161a;
+    }
+
+    h1, h2, h3 {
+      color: #7f5af0; 
     }
 
     h1 {
@@ -40,7 +44,7 @@
     }
 
     a {
-      color: #007acc;
+      color: #fbbf24;
       text-decoration: none;
     }
 
@@ -68,7 +72,14 @@
       flex-direction: column;
       justify-content: center;
       padding: 80px 40px;
-      border-bottom: 1px solid #ddd;
+      background-color: #16161a; 
+    }
+
+    .scroll-section:nth-child(odd) {
+      background-color: #f9f9f9;
+    }
+    .scroll-section:nth-child(even) {
+      background-color: #ffffff;
     }
 
     .hero-grid {
@@ -84,7 +95,7 @@
 
     .scroll-section--hero {
       height: 80vh;
-      background-color: #f9f9f9;
+      background-color: #16161a;
       position: relative;
     }
 
@@ -101,43 +112,41 @@
     .hero-left h1 {
       font-size: 3em;
       line-height: 1.2;
+      color: #7f5af0;
     }
 
     .hero-left .dot {
-      color: #caffbf;
+      color: #fbbf24;
     }
 
     .hero-left p {
       font-size: 1.2em;
       margin: 1em 0;
+      color: #c9d1d9;
     }
 
     .hero-highlights {
       font-size: 0.95em;
-      color: #cfd8dc;
+      color: #94a1b2;
     }
 
     .hero-right {
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-
-    .scroll-section:nth-child(odd) {
-      background-color: #f9f9f9;
-    }
-    .scroll-section:nth-child(even) {
-      background-color: #ffffff;
+      color: #
     }
 
     .project-title {
       font-weight: bold;
       display: block;
       margin-bottom: 4px;
+      color: #fbbf24;
     }
 
     .project-links {
       font-size: 0.95em;
+      color: #c9d1d9;
     }
 
     .project-grid {
@@ -150,10 +159,10 @@
     .project-card {
       flex: 1;
       min-width: 180px;
-      background: #f2f2f2;
-      padding: 16px;
-      border: 1px solid #ddd;
+      background: #1f1f26;
+      padding: 16px; 
       border-radius: 8px;
+      color: #fffffe;
       margin-bottom: 20px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
       transition: transform 0.2s ease;
@@ -161,10 +170,21 @@
 
     .project-card:hover {
       transform: scale(1.02);
+      border-color: #7f5af0;
+    }
+    .source-btn {
+      background-color: #7f5af0;
+      color: #16161a;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: bold;
     }
 
     .source-btn:hover {
-      background-color: #005f99;
+      background-color: #6846c3;
     }
 
     .resume-grid {
