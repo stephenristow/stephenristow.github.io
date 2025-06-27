@@ -14,6 +14,8 @@
       line-height: 1.6;
       color: #333;
       background-color: #f9f9f9;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
     }
 
     section {
@@ -54,6 +56,28 @@
     li {
       margin-bottom: 1.2em;
     }
+
+    html {
+      scroll-behavior: smooth; 
+    }
+
+    .scroll-section {
+      min-height: 100vh; 
+      padding: 60px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      scroll-snap-align: start;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .scroll-section:nth-child(odd) {
+      background-color: #f9f9f9;
+    }
+    .scroll-section:nth-child(even) {
+      background-color: #ffffff;
+    }
+
 
     .project-title {
       font-weight: bold;
@@ -111,41 +135,45 @@
   </style>
 </head>
 <body>
-
-  <h1>Hi, I'm Stephen Ristow</h1>
-  <p>I'm a developer building full-stack web applications.</p>
-
-  <h2>Live Demos</h2>
-  <div class="project-grid">
-    <a href="https://pawsport-production.up.railway.app/" target="_blank" class="project-card">
-      <span class="project-title">PawsPort — A social network for dog owners</span>
-      <button class="source-btn" onclick="event.stopPropagation(); window.open('https://github.com/stephenristow/pawsport', 'blank');">
-        Source Code
-      </button>
-    </a>
-  </div>
-  <!-- Add more projects here as needed -->
-  <h2>Source Code Only</h2>
-  <div class="project-grid">
-    <a href="https://github.com/stephenristow/Gymothy" target="_blank" class="project-card">
-      <span class="project-title">Gymothy — A workout tracker for strength training</span>
-    </a>
-    <a href="https://github.com/stephenristow/NestEgg" target="_blank" class="project-card">
-      <span class="project-title">NestEgg — A finance planner for investments</span>
-    </a>
-  </div>
-
-  <h2>Resume</h2>
-  <div class="resume-grid">
-    <div class="resume-card">
-      <h3>Data & Analytics Resume</h3>
-      <p><a href="/assets/resume-data.pdf" download="StephenRistow_Resume_Data.pdf">Download PDF</a></p>
+  <section class="scroll-section">
+    <h1>Hi, I'm Stephen Ristow</h1>
+    <p>I'm a developer building full-stack web applications.</p>
+  </section>
+  
+  <section class="scroll-section"></section>
+    <h2>Live Demos</h2>
+    <div class="project-grid">
+      <a href="https://pawsport-production.up.railway.app/" target="_blank" class="project-card">
+        <span class="project-title">PawsPort — A social network for dog owners</span>
+        <button class="source-btn" onclick="event.stopPropagation(); window.open('https://github.com/stephenristow/pawsport', 'blank');">
+          Source Code
+        </button>
+      </a>
     </div>
-    <div class="resume-card">
-      <h3>Software Developer Resume</h3>
-      <p><a href="/assets/resume-dev.pdf" download="StephenRistow_Resume_Dev.pdf">Download PDF</a></p>
+    
+    <h2>Source Code Only</h2>
+    <div class="project-grid">
+      <a href="https://github.com/stephenristow/Gymothy" target="_blank" class="project-card">
+        <span class="project-title">Gymothy — A workout tracker for strength training</span>
+      </a>
+      <a href="https://github.com/stephenristow/NestEgg" target="_blank" class="project-card">
+        <span class="project-title">NestEgg — A finance planner for investments</span>
+      </a>
     </div>
-  </div>
+  </section>
 
+  <section class="scroll-section">
+    <h2>Resume</h2>
+    <div class="resume-grid">
+      <div class="resume-card">
+        <h3>Data & Analytics Resume</h3>
+        <p><a href="/assets/resume-data.pdf" download="StephenRistow_Resume_Data.pdf">Download PDF</a></p>
+      </div>
+      <div class="resume-card">
+        <h3>Software Developer Resume</h3>
+        <p><a href="/assets/resume-dev.pdf" download="StephenRistow_Resume_Dev.pdf">Download PDF</a></p>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
