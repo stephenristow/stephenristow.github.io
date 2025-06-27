@@ -191,26 +191,25 @@
   
   function scrollToSection(index) {
     if (index < 0 || index >= totalSections) return;
+    isScrolling = true;
     currentSection = index;
     window.scrollTo({
       top: sections[index].offsetTop,
       behavior: 'smooth'
     });
+
+    setTimeout(() => { isScrolling = false; }, scrollDelay);
   }
   
   window.addEventListener('wheel', (e) => {
-    const now = Date.now();
-    const delta = e.deltaY;
-
-    if (Math.abs(delta) < wheelThreshold || now - lastScrollTime < scrollDelay) return;
+    if (isScrolling) return;
   
+    const delta = e.deltaY;
     if (delta > 0) {
       scrollToSection(currentSection + 1);
-    } else {
+    } else if (delta < 0) {
       scrollToSection(currentSection - 1);
     }
-  
-    lastScrollTime = now; 
   });
   
 
@@ -222,9 +221,7 @@
     } else if (e.key === 'ArrowUp') {
       scrollToSection(currentSection - 1);
     }
-  
-    isScrolling = true;
-    setTimeout(() => { isScrolling = false; }, 800);
   });
+  
   </script>
   
