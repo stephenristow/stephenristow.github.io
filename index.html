@@ -159,14 +159,16 @@
 
     .project-card {
       flex: 1;
+      min-height: 
       min-width: 180px;
       background: #1f1f26;
-      padding: 16px; 
+      padding: 16px;
+      border: 1px solid transparent; 
       border-radius: 8px;
       color: #fffffe;
       margin-bottom: 20px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
 
     .project-card:hover {
