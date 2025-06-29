@@ -49,7 +49,7 @@
     }
 
     a:hover {
-      text-decoration: underline;
+      text-decoration: none;
     }
 
     ul {
@@ -213,6 +213,21 @@
       text-decoration: none;
       position: relative;
       overflow: hidden;
+      transition: color 0.3s ease;
+      z-index: 0;
+    }
+
+    .resume-card h3 {
+      margin: 0;
+      font-size: 1.2em;
+      color: #7f5af0;
+      transition: color 0.3s ease;
+    }
+
+    .resume-card p {
+      margin-top: 8px;
+      color: #c9d1d9;
+      transition: color 0.3s ease;
     }
 
     .resume-card:hover {
@@ -221,13 +236,34 @@
       border-color: #7f5af0;
     }
 
+    .resume-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: #7f5af0;
+      z-index: -1;
+      transition: left 0.4s ease;
+    }
+
+    .resume-card:hover::before {
+      left: 0;
+    }
+
+    .resume-card:hover h3,
+    .resume-card:hover p {
+      color: #ffffff;
+    }
+
     .ripple-wrapper {
       position: relative;
       display: block;
       z-index: 1;
     }
 
-    .resume-card::before {
+    .resume-card::after {
       content: '';
       position: absolute;
       top: var(--y, 50%);
@@ -238,6 +274,7 @@
       border-radius: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
+      z-index: -1;
       animation: none;
     }
 
