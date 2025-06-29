@@ -207,7 +207,51 @@
       padding: 16px;
       border: 1px solid #ddd;
       border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      color: #fffffe;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .resume-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(127, 90, 240, 0.3); /* Purple glow */
+      border-color: #7f5af0;
+    }
+
+    .ripple-wrapper {
+      position: relative;
+      display: block;
+      z-index: 1;
+    }
+
+    .resume-card::before {
+      content: '';
+      position: absolute;
+      top: var(--y, 50%);
+      left: var(--x, 50%);
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: ripple 0.6s ease-out;
+    }
+
+    .resume-card.ripple::before {
+      animation: ripple 0.6s ease-out;
+    }
+
+
+    @keyframes ripple {
+      to {
+        width: 200%;
+        height: 200%;
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -248,14 +292,18 @@
   <section class="scroll-section scroll-section--resume">
     <h2>Resume</h2>
     <div class="resume-grid">
-      <div class="resume-card">
-        <h3>Data & Analytics Resume</h3>
-        <p><a href="/assets/resume-data.pdf" download="StephenRistow_Resume_Data.pdf">Download PDF</a></p>
-      </div>
-      <div class="resume-card">
-        <h3>Software Developer Resume</h3>
-        <p><a href="/assets/resume-dev.pdf" download="StephenRistow_Resume_Dev.pdf">Download PDF</a></p>
-      </div>
+      <a href="/assets/resume-data.pdf" download="StephenRistow_Resume_Data.pdf" class="resume-card">
+        <span class="ripple-wrapper">
+          <h3>Data & Analytics Resume</h3>
+          <p>Download PDF</p>
+        </span>
+      </a>
+      <a href="/assets/resume-dev.pdf" download="StephenRistow_Resume_Dev.pdf" div class="resume-card">
+        <span class="ripple-wrapper">
+          <h3>Software Developer Resume</h3>
+          <p>Download PDF</p>
+        </span>
+      </a>
     </div>
   </section>
 </body>
@@ -312,5 +360,20 @@
     }
   });
 
-  </script>
+  document.querySelectorAll('.resume-card').forEach(card => {
+    card.addEventListener('click', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--x', `${x}px`);
+      card.style.setProperty('--y`, `${y}px`);
+
+      // Trigger the animation by forcing a reflow
+      card.classList.remove('ripple');
+      void card.offsetWidth; // reflow
+      card.classList.add('ripple');
+    });
+  });
+
+</script>
   
