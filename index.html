@@ -160,12 +160,10 @@
 
     .project-live {
       align-items: flex-start;
-      transform: translateY(-20%);
     }
 
     .project-source {
       align-items: flex-end;
-      transform: translateY(20%);
     }
 
     .project-grid {
@@ -175,6 +173,13 @@
       margin-top: 20px;
     }
 
+    .project-live .project-grid {
+      transform: translateY(-20%);
+    }
+
+    .project-source .project-grid {
+      transform: translateY(20%);
+    }
 
     .scroll-section--resume {
       padding-left: 80px;
@@ -458,6 +463,7 @@
           </a>
         </div>
       </div>
+
     </div>
   </section>
 
