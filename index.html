@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
   <title>Stephen Ristow | Portfolio</title>
   <style>
 
@@ -84,6 +85,43 @@
       width: 100%;
       padding: 60px;
       box-sizing: border-box;
+    }
+
+    .hero-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+    }
+
+    .hello-text {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.2em;
+      color: #94a1b2;
+      margin: 0;
+    }
+
+    .intro-text {
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 1.5em;
+      margin: 0.4em 0;
+      color: #c9d1d9;
+    }
+
+    .name-text {
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 3.2em;
+      margin: 0.3em 0;
+      color: #7f5af0;
+    }
+
+    .tagline-text {
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 1.2em;
+      margin: 0.4em 0;
+      color: #c9d1d9;
     }
 
     .scroll-section--hero {
@@ -298,13 +336,11 @@
 </head>
 <body>
   <section class="scroll-section scroll-section--hero">
-    <div class="hero-grid">
-        <div class="hero-left">
-          <h1>Hi, I'm Stephen Ristow</h1>
-          <p>I'm a developer building full-stack web applications.</p>
-        </div>
-        <div class="hero-right">
-        </div>
+    <div class="hero-stack">
+      <p class="hello-text">Hello,</p>
+      <p class="intro-text">My name is</p>
+      <h1 class="name-text">Stephen Ristow</h1>
+      <p class="tagline-text">I'm a developer building full-stack web applications.</p>
     </div>
   </section>
 
