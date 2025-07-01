@@ -141,7 +141,7 @@
       padding-right: 80px;
       background-color: #2a2a33;
     }
-
+    /* 
     .hero-left, .hero-right {
       flex: 1;
       max-width: 50%;
@@ -178,7 +178,57 @@
       justify-content: center;
       align-items: center;
       color: #a78bfa
+    } */
+
+    .scroll-cta {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: #94a1b2;
+      font-size: 0.95em;
+      font-family: 'Ubuntu', sans-serif;
+      opacity: 0.7;
     }
+
+    .scroll-indicator {
+      margin: 8px auto 0;
+      width: 16px;
+      height: 24px;
+      border: 2px solid #7f5af0;
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .scroll-indicator::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      background-color: #7f5af0;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      animation: scroll-dot 1.5s infinite;
+    }
+
+    @keyframes scroll-dot {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+      50% {
+        opacity: 0.5;
+        transform: translate(-50%, 6px);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+
 
     .project-title {
       font-weight: bold;
@@ -341,6 +391,10 @@
       <p class="intro-text">My name is</p>
       <h1 class="name-text">Stephen Ristow</h1>
       <p class="tagline-text">I'm a developer building full-stack web applications.</p>
+    </div>
+    <div class="scroll-cta">
+      <span>Scroll for More</span>
+      <div class="scroll-indicator"></div>
     </div>
   </section>
 
