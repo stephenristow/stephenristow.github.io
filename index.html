@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <title>Stephen Ristow | Portfolio</title>
   <style>
 
@@ -73,6 +75,16 @@
       background-color: #16161a; 
     }
 
+    .social-cta-row{
+      display:flex;
+      gap:12px;
+      justify-content:center;  /* or flex-start if you prefer left-aligned */
+      margin-top:16px;
+    }
+
+    /* optional small variant */
+    .btn-cta.btn-cta--sm{ padding:.45rem .75rem; font-size:.9rem; }
+
     .hero-grid {
       display: flex;
       flex-direction: row;
@@ -128,11 +140,29 @@
     }
 
     .scroll-section--projects {
-      padding-left: 80px;
-      padding-right: 80px;
-      background-color: #414141; 
+      height: 100vh;
+      scroll-snap-align: start;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: auto 1fr;
+      grid-template-areas: 
+        "live-demos resume"
+        "source-code resume";
+      gap: 40px;
+      padding: 80px;
+      align-content: start;
+      background-color: #414141;
     }
-    
+        
+    .scroll-section--projects .live-demos,
+    .scroll-section--projects .source-code-only {
+      margin-top: -40px;
+    }
+        
+    .scroll-section--projects .resume-section {
+      margin-top: 40px;
+    }
+
     .carousel-section {
       display: flex;
       flex-direction: column;
@@ -143,16 +173,18 @@
     .carousel-heading {
       font-size: 1.8em;
       color: #ede8fd;
-      margin-left: 1rem;
+      marginleft: 0 0 1rem;
     }
 
     .carousel-track {
       display: flex;
+      overflow-y: visible;
       gap: 20px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      padding-bottom: 1rem;
+      padding: 1.5rem;
+      align-items: flex-start;
     }
 
     .carousel-track::-webkit-scrollbar {
@@ -168,6 +200,31 @@
       padding-left: 80px;
       padding-right: 80px;
       background-color: #494949;
+    }
+
+    .scroll-section--projects .projects-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: auto auto;
+      grid-template-areas:
+        "live-demos resume"
+        "source-code resume";
+      gap: 40px;
+      padding: 80px;
+    }
+
+    .live-demos        { 
+      grid-area: live-demos; 
+    }
+
+    .source-code-only  { 
+      grid-area: source-code;
+      align-self: end;
+    }
+
+    .resume-section {
+      grid-area: resume; 
+      align-self: start; 
     }
 
     .scroll-cta {
@@ -229,7 +286,10 @@
 
 
     .project-card {
+      position: relative;
+      overflow: visible;
       flex: 0 0 auto;
+      font-size: clamp(0.75rem, 2.5vw, 1rem);
       scroll-snap-align: start;
       min-width: 240px;
       max-width: 240px;
@@ -248,6 +308,70 @@
       transform: scale(1.02);
       border-color: #bbc2e2;
     }
+
+  /* wrapper paints the black block and is the hover target */
+  .btn-cta-wrap{
+    position:relative;
+    display:inline-block;
+    --jump:6px;
+    padding:var(--jump);              /* enlarges hit area to include start+end */
+    margin:calc(-1*var(--jump));      /* cancels layout shift from padding */
+  }
+
+  .project-card .btn-cta-wrap {
+    position: absolute;
+    --edge: 16px;
+    right: calc(var(--edge) - var(--jump));
+    bottom: calc(var(--edge) - var(--jump));
+    padding: var(--jump);
+    margin: 0;
+  }
+
+  .btn-cta-wrap::after{
+    content:"";
+    position:absolute;
+    inset:var(--jump);                /* same size as the button itself */
+    border-radius:10px;
+    background:#000;
+    opacity:0;                        /* hidden until hover */
+    z-index:0;
+    pointer-events:none;
+  }
+
+  /* the button */
+  .btn-cta{
+    --cta-bg:#bbc2e4;
+    position:relative;
+    z-index:1;                        /* above the block */
+    display:inline-flex;
+    gap: .5rem;
+    align-items:center;
+    padding:.55rem .9rem;
+    border-radius:10px;
+    background:var(--cta-bg);
+    color:#322e18;
+    border:2px solid transparent;
+    text-decoration:none;
+    cursor:pointer;
+    transition:none;                  /* snap, no animation */
+  }
+
+  .btn-cta i {
+    line-height: 1;
+    font-size: 1.05em;
+  }
+
+  /* hover: move the button; reveal the block */
+  .btn-cta-wrap:hover .btn-cta{
+    transform:translate(calc(-1*var(--jump)), calc(-1*var(--jump)));
+    border-color:#000;
+  }
+  .btn-cta-wrap:hover::after{ opacity:1; }
+
+  /* optional press feel */
+  .btn-cta:active{
+    transform:translate(calc(-.5*var(--jump)), calc(-.5*var(--jump)));
+  }
     .source-btn {
       font-family: 'Fira Code', monospace;
       font-size: 1.0em;
@@ -373,6 +497,20 @@
       <p class="intro-text">My name is</p>
       <h1 class="name-text">Stephen Ristow</h1>
       <p class="tagline-text">I'm a developer building full-stack web applications.</p>
+      <div class="social-cta-row">
+        <span class="btn-cta-wrap">
+          <a class="btn-cta" href="https://github.com/stephenristow" target="_blank" rel="noopener">
+            <i class="fa-brands fa-github" aria-hidden="true"></i>
+            <span>GitHub</span>
+          </a>
+        </span>
+        <span class="btn-cta-wrap">
+          <a class="btn-cta" href="https://www.linkedin.com/in/stephenristow" target="_blank" rel="noopener">
+            <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+            <span>LinkedIn</span>
+          </a>
+        </span>
+      </div>
     </div>
     <div class="scroll-cta">
       <span>Scroll for More</span>
@@ -381,48 +519,52 @@
   </section>
 
   <section class="scroll-section scroll-section--projects">
-    <div class="carousel-section">
-    
-      <h2 class="carousel-heading">Live Demos</h2>
-      <div class="carousel-track" id="live-demos">
-        <a href="https://pawsport-production.up.railway.app/" target="_blank" class="project-card">
-          <span class="project-title">PawsPort — A social network for dog owners</span>
-          <button class="source-btn" onclick="event.stopPropagation(); window.open('https://github.com/stephenristow/pawsport', 'blank');">
-            Source Code
-          </button>
-        </a>
+    <div class="projects-grid">
+      <div class="live-demos">
+        <h2 class="carousel-heading">Live Demos</h2>
+        <div class="carousel-track" id="live-demos">
+          <a href="https://pawsport-production.up.railway.app/" target="_blank" class="project-card">
+            <span class="project-title">PawsPort — A social network for dog owners</span>
+            <span class="btn-cta-wrap"
+                  onclick="event.stopPropagation(); window.open('https://github.com/stephenristow/pawsport','_blank')">
+              <span class="btn-cta">Source Code</span>
+            </span>
+          </a>
+        </div>
       </div>
-    
-      <h2 class="carousel-heading">Source Code Only</h2>
-      <div class="carousel-track" id="source-code">
-        <a href="https://github.com/stephenristow/Gymothy" target="_blank" class="project-card">
-          <span class="project-title">Gymothy — A workout tracker for strength training</span>
-        </a>
-        <a href="https://github.com/stephenristow/NestEgg" target="_blank" class="project-card">
-          <span class="project-title">NestEgg — A finance planner for investments</span>
-        </a>
+      
+      <div class="source-code-only">
+        <h2 class="carousel-heading">Source Code Only</h>
+        <div class="carousel-track" id="source-code">
+          <a href="https://github.com/stephenristow/Gymothy" target="_blank" class="project-card">
+            <span class="project-title">Gymothy — A workout tracker for strength training</span>
+          </a>
+          <a href="https://github.com/stephenristow/NestEgg" target="_blank" class="project-card">
+            <span class="project-title">NestEgg — A finance planner for investments</span>
+          </a>
+        </div>
       </div>
+    </div>
 
+    <div class="resume-section">
+      <h2>Resume</h2>
+      <div class="resume-grid">
+        <a href="/assets/resume-data.pdf" download="StephenRistow_Resume_Data.pdf" class="resume-card">
+          <span class="ripple-wrapper">
+            <h3>Data & Analytics Resume</h3>
+            <p>Download PDF</p>
+          </span>
+        </a>
+        <a href="/assets/resume-dev.pdf" download="StephenRistow_Resume_Dev.pdf" div class="resume-card">
+          <span class="ripple-wrapper">
+            <h3>Software Developer Resume</h3>
+            <p>Download PDF</p>
+          </span>
+        </a>
+      </div>
     </div>
   </section>
 
-  <section class="scroll-section scroll-section--resume">
-    <h2>Resume</h2>
-    <div class="resume-grid">
-      <a href="/assets/resume-data.pdf" download="StephenRistow_Resume_Data.pdf" class="resume-card">
-        <span class="ripple-wrapper">
-          <h3>Data & Analytics Resume</h3>
-          <p>Download PDF</p>
-        </span>
-      </a>
-      <a href="/assets/resume-dev.pdf" download="StephenRistow_Resume_Dev.pdf" div class="resume-card">
-        <span class="ripple-wrapper">
-          <h3>Software Developer Resume</h3>
-          <p>Download PDF</p>
-        </span>
-      </a>
-    </div>
-  </section>
 </body>
 </html>
 
