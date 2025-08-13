@@ -4,12 +4,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <title>Stephen Ristow | Portfolio</title>
   <style>
+    /* mononoki regular */
+    @font-face {
+      font-family: "Mononoki";
+      src: url("./assets/fonts/mononoki/MononokiNerdFontMono-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* mononoki bold (optional) */
+    @font-face {
+      font-family: "Mononoki";
+      src: url("./assets/fonts/mononoki/MononokiNerdFontMono-Bold.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
 
     html {
       height: 100%;
@@ -21,7 +41,7 @@
     body {
       height: 100%;
       margin: 0;
-      font-family: 'Ubuntu', sans-serif;
+      font-family: 'Mononoki'; 
       line-height: 1.6;
       color: #fffffe;
       background-color: #16161a;
@@ -66,7 +86,6 @@
     }
 
     .scroll-section {
-      height: 100vh; 
       scroll-snap-align: start;
       display: flex;
       flex-direction: column;
@@ -99,42 +118,50 @@
     .hero-stack {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: start;
       justify-content: center;
       height: 100%;
       text-align: center;
     }
 
+    .hello-text-stack {
+      display: flex;
+      flex-direction: row;
+      align-items: start;
+      justify-content: left;
+    }
+
     .hello-text {
-      font-family: 'Fira Code', monospace;
-      font-size: 1.2em;
+      font-family: 'VT323', monospace;
+      font-size: 1.6em;
       color: #94a1b2;
-      margin: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      margin-right: 8px;
     }
 
     .intro-text {
-      font-family: 'Ubuntu', sans-serif;
+      font-family: 'Mononoki';
       font-size: 1.5em;
       margin: 0.4em 0;
       color: #c9d1d9;
     }
 
     .name-text {
-      font-family: 'Ubuntu', sans-serif;
+      font-family: 'Mononoki';
       font-size: 3.2em;
       margin: 0.3em 0;
       color: #ede8fd;
     }
 
     .tagline-text {
-      font-family: 'Ubuntu', sans-serif;
+      font-family: 'Mononoki';
       font-size: 1.2em;
       margin: 0.4em 0;
       color: #c9d1d9;
     }
 
     .scroll-section--hero {
-      height: 80vh;
       background-color: #333333;
       position: relative;
     }
@@ -235,7 +262,7 @@
       text-align: center;
       color: #94a1b2;
       font-size: 0.95em;
-      font-family: 'Ubuntu', sans-serif;
+      font-family: 'Mononoki';
       opacity: 0.7;
     }
 
@@ -340,6 +367,10 @@
 
   /* the button */
   .btn-cta{
+    font-family: "VT323", monospace;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 1.2em;
     --cta-bg:#bbc2e4;
     position:relative;
     z-index:1;                        /* above the block */
@@ -373,7 +404,7 @@
     transform:translate(calc(-.5*var(--jump)), calc(-.5*var(--jump)));
   }
     .source-btn {
-      font-family: 'Fira Code', monospace;
+      font-family: ' Code', monospace;
       font-size: 1.0em;
       background-color: #bbc2e4;
       color: #322e18;
@@ -493,7 +524,10 @@
 <body>
   <section class="scroll-section scroll-section--hero">
     <div class="hero-stack">
-      <p class="hello-text">Hello,</p>
+      <div class="hello-text-stack">
+        <p class="hello-text" id="blinkingElement">></p>
+        <p class="hello-text">Hello,</p>
+      </div>
       <p class="intro-text">My name is</p>
       <h1 class="name-text">Stephen Ristow</h1>
       <p class="tagline-text">I'm a developer building full-stack web applications.</p>
@@ -512,13 +546,7 @@
         </span>
       </div>
     </div>
-    <div class="scroll-cta">
-      <span>Scroll for More</span>
-      <div class="scroll-indicator"></div>
-    </div>
-  </section>
 
-  <section class="scroll-section scroll-section--projects">
     <div class="projects-grid">
       <div class="live-demos">
         <h2 class="carousel-heading">Live Demos</h2>
@@ -591,6 +619,27 @@
 
     setTimeout(() => { isScrolling = false; }, scrollDelay);
   }
+
+  function cursorBlinking(elementId, intervalTime) {
+    const element = document.getElementById(elementId);
+    if (!element) {
+      console.error(`Element with ID '${elementId}' not found.`);
+      return;
+    }
+
+    let isVisible = true;
+    const blinkInterval = setInterval(() => {
+      if (isVisible) {
+        element.style.opacity = '0';
+      } else {
+        element.style.opacity = '1';
+      }
+      isVisible = !isVisible;
+    }, intervalTime);
+
+    return blinkInterval;
+  }
+  const myBlinkInterval = cursorBlinking('blinkingElement', 677);
   
   window.addEventListener('wheel', (e) => {
     if (isScrolling) 
