@@ -90,7 +90,7 @@
       --cursorY: 50vh;
       --cursorX2: 50vw;
       --cursorY2: 50vh;
-      --r1: 16vmax;
+      --r1: 24vmax;
       --r2: 32vmax;
       --animationDuration: 10s;
       --animationDelay: 15s;
@@ -403,13 +403,13 @@
         background:
           /* vignette/dark falloff */
           radial-gradient(circle var(--r2) at var(--cursorX2) var(--cursorY2),
-            rgba(0,0,0,0) 35%,
-            rgba(0,0,0,.65) 75%,
-            rgba(0,0,0,.92) 100%),
+            rgba(0,0,0,0) 40%,
+            rgba(0,0,0,.20) 55%,
+            rgba(0,0,0,.30) 75%),
           /* bright core */
           radial-gradient(circle var(--r1) at var(--cursorX) var(--cursorY),
-            rgba(255,255,255,.30) 0%,
-            rgba(255,255,255,.10) 55%,
+            rgba(255,255,255,.1) 0%,
+            rgba(255,255,255,.06) 60%,
             rgba(255,255,255,0) 100%);
         mix-blend-mode: normal;     /* try 'overlay' or remove if you prefer pure additive */
         /* subtle flicker without rebuilding gradients */
