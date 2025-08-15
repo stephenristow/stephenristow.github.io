@@ -501,6 +501,17 @@
       }
     }
 
+    body::after{
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,.035) 0 1px,
+          rgba(255,255,255,0) 1 3px
+        );
+      mix-blend-mode: soft-light;
+      opacity: .18;
+    }
+
     @keyframes flicker {
       0%, 100% { --r1: 15vmax; --r2: 30vmax; opacity: 0.96; }
       50%      { --r1: 17vmax; --r2: 34vmax; opacity: 1; }
@@ -573,8 +584,8 @@
         <li class="rail-card">
           <article class="project-card">
             <h3 class="project-title">
-              <a href="https://github.com/stephenristow/Gymothy" target="_blank" rel="noopener">
-                Gymothy — A workout tracker for strength training
+              <a href="https://github.com/stephenristow/gotchatama" target="_blank" rel="noopener">
+                GotchaTama — A Tamagotchi collection tracker
               </a>
             </h3>
           </article>
@@ -583,7 +594,7 @@
           <article class="project-card">
             <h3 class="project-title">
               <a href="https://github.com/stephenristow/Gymothy" target="_blank" rel="noopener">
-                GotchaTama — A Tamagotchi collection tracker
+                Gymothy — A workout tracker for strength training
               </a>
             </h3>
           </article>
