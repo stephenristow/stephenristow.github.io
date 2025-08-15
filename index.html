@@ -37,6 +37,90 @@
       overflow-y: scroll;
     }
 
+    #fireflies{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    #fireflies .firefly{
+      --s: 3px;
+      --alpha: .55;
+      --move: 12s;
+      --twinkle: 6s;
+      --delay: 0s;
+      --delay2: 0s;
+      --x: 50vw;
+      --y: 50vh;
+      --dx: 40px;
+      --dy: -30px;
+
+      position: absolute;
+      left: 0; top: 0;
+      width: var(--s);
+      height: var(--s);
+      border_radius: 50%;
+      opacity: 0;
+      transform: translate(var(--x), var(--y));
+      will-change: transform, opacity, filter;
+      
+      background: radial-gradient(circle closest-side,
+                  rgba(255,245,190, .90) 0%,
+                  rgba(255,228,140, .35) 60%,
+                  rgba(255,228,140, 0.00) 70%);
+      filter: drop-shadow(0 0 2px rgba(255,235,170, .35))
+              blur(0.2px) saturate(110%);
+
+      animation:
+        ff-in .7s ease-out forwards,
+        ff-drift var(--move) ease-in-out var(--delay) alternate infinite,
+        ff-twinklke var(--twinkle) ease-in-out var(--delay2) infinite;
+    }
+
+    @keyframes ff-in { to { opacity: var(--alpha); } }
+
+    @keyframes ff-drift {
+      from { transform: translate(calc(var(--x)), calc(var(--y))); }
+      to { transform: translate(calc(var(--x) + var(--dx)), calc(var(--y) + var(--dy))); }
+    }
+
+    @keyframes ff-twinklke {
+      0% { opacity: calc(var(--alpha) * .75); filter: drop-shadow(0 0 1.5px rgba(255,235,170,.25)); }
+      50% { opacity: calc(var(--alpha) * 1.00); filter: drop-shadow(0 0 2.5px rgba(255,235,170,.35)); }
+      100% { opacity: calc(var(--alpha) * .70); filter: drop-shadow(0 0 1.2px rgba(255,235,170,.20)); }
+    }
+
+    #fireflies .firefly.is-fading{
+      animation: ff-out .6s ease-in forwards;
+    }
+    @keyframes ff-out { to { opacity: 0; } }
+
+    #fireflies .firefly::after{
+      content:"";
+      position: absolute;
+      left:50%; top:50%;
+      transform: translate(-50%, -50%);
+      width: calc(var(--s) * 6);
+      height: calc(var(--s) * 6);
+      pointer-events: none;
+      border-radius: 50%;
+      background: radial-gradient(closest-side,
+                  rgba(255,240,180,.22) 0%,
+                  rgba(255,240,180,.10) 55%,
+                  rgba(255,240,180,0) 100%);
+      filter: blur(2px);
+      mix-blend-mode: screen;
+      opacity: .85;
+      animation: ff-twinklke var(--twinkle) ease-in-out var(--delay2) infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #fireflies .firefly{
+        animation: ff-in .4s ease-out forwards;
+      }
+    }
+
     body {
       height: 100%;
       margin: 0;
@@ -436,6 +520,7 @@
   </style>
 </head>
 <body>
+  <div id="fireflies" aria-hidden="true"></div>
   <main class="layout">
     <section class="scroll-section scroll-section--hero">
       <div class="hero-stack">
@@ -469,7 +554,7 @@
         <li class="rail-card">
           <article class="project-card">
             <h3 class="project-title">
-              <a href="https://pawsport-production.up.railway.app/" target="_blank" rel="noopener">
+              <a class="stretched-link" href="https://pawsport-production.up.railway.app/" target="_blank" rel="noopener">
                 PawsPort — A social network for dog owners
               </a>
             </h3>
@@ -517,6 +602,73 @@
   const totalSections = sections.length;
   const W = window.innerWidth;
   const H = window.innerHeight;
+
+  (() => {
+    const container = document.getElementById('fireflies');
+    if (!container) return;
+
+    const MAX_ON_SCREEN = 10;
+    const TICK_MS = 1400;
+    const SPAWN_PROBABILITY = 0.60;
+    const LIFE_MIN_MS = 8000;
+    const LIFE_MAX_MS = 18000;
+
+    const vw = () => Math.max(320, window.innerWidth);
+    const vh = () => Math.max(380, window.innerHeight);
+
+    function rand(min, max){ return Math.random() * (max - min) + min; }
+    function choice(a, b){ return Math.random() < 0.5 ? a : b; }
+
+    function spawn() {
+      const el = document.createElement('span');
+      el.className = 'firefly';
+
+      const x = rand(5, 95);
+      const y = rand(10, 90);
+
+      const size = rand(2, 4);
+      const alpha = rand(0.35, 0.65);
+      const move = rand(9, 16);
+      const twink = rand(4, 8);
+      const delay = rand(0, 4);
+      const delay2 = rand(0, 6);
+
+      const dx = choice(1, -1) * rand(20, 90);
+      const dy = choice(1, -1) * rand(10, 60);
+
+      el.style.setProperty('--x', x + 'vw');
+      el.style.setProperty('--y', y + 'vh');
+      el.style.setProperty('--s', size + 'px');
+      el.style.setProperty('--alpha', alpha.toString());
+      el.style.setProperty('--move', move + 's');
+      el.style.setProperty('--twinkle', twink + 's');
+      el.style.setProperty('--delay', delay + 's');
+      el.style.setProperty('--delay2', delay2 + 's');
+      el.style.setProperty('--dx', dx + 'px');
+      el.style.setProperty('--dy', dy + 'px');
+
+      container.appendChild(el);
+
+      const life = rand(LIFE_MIN_MS, LIFE_MAX_MS);
+      setTimeout(() => {
+        el.classList.add('is-fading');
+        setTimeout(() => el.remove(), 700);
+      }, life);
+    }
+
+    function tick() {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      if (container.childElementCount < MAX_ON_SCREEN && Math.random() < SPAWN_PROBABILITY){
+        spawn();
+      }
+    }
+
+    const startCount = Math.round(rand(1,2));
+    for (let i=0; i<startCount; i++) spawn();
+
+    setInterval(tick, TICK_MS);
+  })();
 
 
   function cursorBlinking(elementId, intervalTime) {
