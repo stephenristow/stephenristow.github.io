@@ -60,7 +60,7 @@
       left: 0; top: 0;
       width: var(--s);
       height: var(--s);
-      border_radius: 50%;
+      border-radius: 50%;
       opacity: 0;
       transform: translate(var(--x), var(--y));
       will-change: transform, opacity, filter;
@@ -305,28 +305,43 @@
       text-decoration: none;
     }
 
+    @property --sweep {
+      syntax: '<angle>';
+      inherits: false;
+      initial-value: 0turn;
+    }
+
     .project-card {
-      position: static;
+      position: relative;
       padding: 16px;
       display: grid;
       grid-template-rows: auto 1fr auto;
       gap: .75rem;
       width: 100%;
       min-height: 132px;
-      background: #05000a;
-      border-radius: 12px;
+      background:
+        linear-gradient(#05000a, #05000a) padding-box,
+        conic-gradient(from var(--sweep),
+          transparent 0 72%,
+          rgba(95,89,255,.95) 78%,      /* bright arc */
+          transparent 84% 100%) border-box;
+      background-clip: padding-box, border-box;
+      border-radius: 2px;
+      border: 2px solid transparent;
+      background
       color: #fffffe;
       text-decoration: none;
       overflow: hidden;
-      transition: transform .2s ease;
+      transition: box-shadow .15s linear;
     }
  
     .project-card:hover {
       transform: scale(1.02);
-      border-color: #bbc2e2;
+      animation: border-sweep 1.6s linear infinite;
+      box-shadow: 0 0 10px rgba(95,89,255,.35);
     }
 
-
+    @keyframes border-sweep { to { --sweep: 1turn; } }
 
     /* the button */
     .btn-cta{
@@ -342,7 +357,7 @@
       gap: .5rem;
       align-items:center;
       padding:.55rem .9rem;
-      border-radius:6px;
+      border-radius: 2px;
       background:var(--cta-bg);
       color:#fffffe;
       border:2px solid transparent;
@@ -386,7 +401,7 @@
     /* 2-column shell */
     .layout {
       display: grid;
-      grid-template-columns: 1fr min(520px, 32vw); /* left grows, right is a fixed/relative sidebar */
+      grid-template-columns: 50vw 50vw;
       gap: 0;
       align-items: start;
     }
@@ -400,7 +415,7 @@
       margin-top: 4rem;
       padding-right: .5rem;  /* room for scrollbar */
       padding-left: .5rem;  /* room for scrollbar */
-      border-radius: 12px;
+      border-radius: 2px;
       margin-right: 3rem;
       margin-left: 3rem;
       scrollbar-gutter: stable both-edges;
@@ -428,7 +443,7 @@
 
     .card {
       border: 1px solid #2a2a2f;
-      border-radius: 12px;
+      border-radius: 2px;
       padding: 1rem;
       background: #242427;
     }
@@ -463,7 +478,7 @@
     .rail-card { 
       padding: 0;
       border:1px solid #2a2a2f; 
-      border-radius:12px; 
+      border-radius: 2px; 
       background:#1e1f23;
     }
     .rail-card a { 
@@ -538,7 +553,7 @@
         <div class="text-stack">
           <div class="hello-text-stack">
             <p class="hello-text" id="blinkingElement">></p>
-            <p class="hello-text">Hello, My name is</p>
+            <p class="hello-text">Hello, my name is</p>
           </div>
           <h1 class="name-text">Stephen Ristow</h1>
           <p class="tagline-text">I'm a developer building full-stack web applications.</p>
@@ -560,13 +575,13 @@
       </div>
     </section>
     <aside class="projects" aria-label="Projects list">
-      <h2 class="rail-title">Live Demos</h2>
+      <h2 class="rail-title">Projects</h2>
       <ul class="rail-list stack-12">
         <li class="rail-card">
           <article class="project-card">
             <h3 class="project-title">
               <a class="stretched-link" href="https://pawsport-production.up.railway.app/" target="_blank" rel="noopener">
-                PawsPort — A social network for dog owners
+                PawsPort — a social network for dog owners
               </a>
             </h3>
 
@@ -579,13 +594,12 @@
         </li>
       </ul>
 
-      <h2 class="rail-title">Source Code Only</h2>
       <ul class="rail-list stack-12">
         <li class="rail-card">
           <article class="project-card">
             <h3 class="project-title">
               <a href="https://github.com/stephenristow/gotchatama" target="_blank" rel="noopener">
-                GotchaTama — A Tamagotchi collection tracker
+                GotchaTama — a Tamagotchi collection tracker
               </a>
             </h3>
           </article>
@@ -594,7 +608,7 @@
           <article class="project-card">
             <h3 class="project-title">
               <a href="https://github.com/stephenristow/Gymothy" target="_blank" rel="noopener">
-                Gymothy — A workout tracker for strength training
+                Gymothy — a workout tracker for strength training
               </a>
             </h3>
           </article>
