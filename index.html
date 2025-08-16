@@ -12,6 +12,7 @@
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <title>Stephen Ristow | Portfolio</title>
+  <link rel="icon" type="image/x-icon" href="./assets/icon/favicon.ico">
   <style>
     /* mononoki regular */
     @font-face {
@@ -305,6 +306,49 @@
       text-decoration: none;
     }
 
+    .project-date {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: #aaa;
+      margin: -0.25rem 16px 0.5rem 16px;
+    }
+
+    .project-card p{
+      margin-left: 16px;
+      margin-right: 16px;
+    }
+
+
+    .tech-chips{ 
+      display:flex; 
+      flex-wrap:wrap; 
+      gap:.45rem; 
+      margin:.25rem 0 0; 
+      padding:0; 
+      list-style:none; 
+    }
+    .tech-chips--dot li{
+      display:inline-flex; 
+      align-items:center; 
+      gap:.4rem;
+      padding:.18rem .5rem .18rem .4rem;
+      border:1px solid #3a3a40;
+      border-radius:8px; 
+      font-size:.82rem; 
+      color:#c9d1d9;
+    }
+    .tech-chips--dot li::before{
+      content:""; 
+      width:.5rem; 
+      height:.5rem; 
+      border-radius:50%;
+      background:#7c74ff; 
+    }
+    .tech-chips--dot li[data-cat="lang"]::before{ background:#7c74ff; }
+    .tech-chips--dot li[data-cat="fw"]::before{ background:#ff7ee6; }
+    .tech-chips--dot li[data-cat="db"]::before{ background:#68f6c0; }
+    .tech-chips--dot li[data-cat="devops"]::before{ background:#ffd36e; }
+
     @property --sweep {
       syntax: '<angle>';
       inherits: false;
@@ -315,8 +359,8 @@
       position: relative;
       padding: 16px;
       display: grid;
-      grid-template-rows: auto 1fr auto;
-      gap: .75rem;
+      grid-template-rows: auto auto 1fr auto;
+      gap: .5rem;
       width: 100%;
       min-height: 132px;
       background:
@@ -420,7 +464,7 @@
       margin-left: 3rem;
       scrollbar-gutter: stable both-edges;
       scrollbar-gutter: stable both-edges;
-      <!-- scroll-snap-type: y proximity; /* nice snap between cards (optional) */ -->
+      /* scroll-snap-type: y proximity; nice snap between cards (optional) */
     }
 
     /* Group headers that stay visible at the top of the inner scroll */
@@ -559,11 +603,11 @@
           <p class="tagline-text">I'm a developer building full-stack web applications.</p>
         </div>
         <div class="social-cta-row">
-          <a class="btn-cta" href="https://github.com/stephenristow" target="_blank" rel="noopener">
+          <a class="btn-cta" href="https://github.com/stephenristow" target="_blank" rel="noopener noreferrer">
             <i class="fa-brands fa-github" aria-hidden="true"></i>
             <span>GitHub</span>
           </a>
-          <a class="btn-cta" href="https://www.linkedin.com/in/stephenristow" target="_blank" rel="noopener">
+          <a class="btn-cta" href="https://www.linkedin.com/in/stephenristow" target="_blank" rel="noopener noreferrer">
             <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
             <span>LinkedIn</span>
           </a>
@@ -574,19 +618,33 @@
         </div>
       </div>
     </section>
+
     <aside class="projects" aria-label="Projects list">
       <h2 class="rail-title">Projects</h2>
       <ul class="rail-list stack-12">
         <li class="rail-card">
           <article class="project-card">
             <h3 class="project-title">
-              <a class="stretched-link" href="https://pawsport-production.up.railway.app/" target="_blank" rel="noopener">
+              <a class="stretched-link" href="https://pawsport-production.up.railway.app/" target="_blank" rel="noopener noreferrer">
                 PawsPort — a social network for dog owners
               </a>
             </h3>
-
+            <time class="project-date" datetime="2024-12" aria-label:"December 2024 to present">Dec 2024 — Present</time>
+            <p>
+              A social web app where dog owners set up pet profiles, and connect with other dog owners.
+              Built with Django and MySQL, styled with HTML/CSS; containerized and deployed using Docker (Kubernetes) and Railway.
+            </p>
+            <ul class="tech-chips tech-chips--dot">
+              <li data-cat="lang">Python</li>
+              <li data-cat="fw">Django</li>
+              <li data-cat="db">MySQL</li>
+              <li data-cat="lang">HTML</li>
+              <li data-cat="lang">CSS</li>
+              <li data-cat="devops">Docker</li>
+              <li data-cat="devops">Kubernetes</li>
+            </ul>
             <div class="actions">
-              <a class="btn-cta" href="https://github.com/stephenristow/pawsport" target="_blank" rel="noopener">
+              <a class="btn-cta" href="https://github.com/stephenristow/pawsport" target="_blank" rel="noopener noreferrer" aria-label="View PawsPort source code on GitHub">
                 Source Code
               </a>
             </div>
@@ -598,19 +656,42 @@
         <li class="rail-card">
           <article class="project-card">
             <h3 class="project-title">
-              <a href="https://github.com/stephenristow/gotchatama" target="_blank" rel="noopener">
+              <a href="https://github.com/stephenristow/gotchatama" target="_blank" rel="noopener noreferrer">
                 GotchaTama — a Tamagotchi collection tracker
               </a>
             </h3>
+            <p class="project-date">Jul 2025 — Present</p>
+            <p>
+              A tracking app that enables Tamagotchi enthusiasts to track which characters they have and will obtain.
+              Built with React Native, using TypeScript, styled with CSS; deployed using Expo Router.
+            </p>
+            <ul class="tech-chips tech-chips--dot">
+              <li data-cat="lang">TypeScript</li>
+              <li data-cat="lang">CSS</li>
+              <li data-cat="fw">React Native</li>
+            </ul>
           </article>
         </li>
         <li class="rail-card">
           <article class="project-card">
             <h3 class="project-title">
-              <a href="https://github.com/stephenristow/Gymothy" target="_blank" rel="noopener">
+              <a href="https://github.com/stephenristow/Gymothy" target="_blank" rel="noopener noreferrer">
                 Gymothy — a workout tracker for strength training
               </a>
             </h3>
+            <p class="project-date"></p>
+            <p>
+              An app that provides users with a strength training specialized workout tracker.
+              Built with Django and MySQL, and styled with HTML/CSS. 
+            </p>
+            <ul class="tech-chips tech-chips--dot">
+              <li data-cat="lang">Python</li>
+              <li data-cat="fw">Django</li>
+              <li data-cat="db">MySQL</li>
+              <li data-cat="lang">HTML</li>
+              <li data-cat="lang">CSS</li>
+              <li data-cat="devops">Docker</li>
+            </ul>
           </article>
         </li>
       </ul>
@@ -623,7 +704,7 @@
 
 <script>
   let currentSection = 0;
-  const sections = document.querySelectorAll('.page');
+  const sections =  document.querySelectorAll('.page');
   const totalSections = sections.length;
   const W = window.innerWidth;
   const H = window.innerHeight;
