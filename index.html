@@ -131,6 +131,126 @@
       background-color: #05000a;
     }
 
+    @property --scan-y {
+      syntax: '<length>'; 
+      initial-value: 0px; 
+      inherits: false; 
+    }
+
+    @property --scan-angle { 
+      syntax: '<angle>'; 
+      initial-value: 0deg; 
+      inherits: false; 
+    }
+
+    .project-card.crt {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      filter: contrast(112%) saturate(118%);
+      border-radius: 1.6%/2.4%;
+      transform: perspective(1000px) translateZ(0) scale(0.998);
+    }
+
+    .project-card.crt::before {
+      content:"";
+      position: absolute; inset: 0;
+      pointer-events: none; 
+      z-index: 2;
+      border-radius: inherit;
+      background: 
+        radial-gradient(120% 80% at 50% 50%,
+          rgba(0,0,0,0) 60%,
+          rgba(0,0,0,.28) 80%,
+          rgba(0,0,0,.42) 100%),
+        radial-gradient(ellipse at 50% 45%,
+          rgba(255,255,255,.12) 0%,
+          rgba(255, 255, 255,0) 60%),
+        repeating-linear-gradient(
+          calc(0deg + var(--scan-angle)),
+          rgba(255, 255,255,.3) 0 2px,
+          rgba(0,0,0,0) 2px 4px
+        );
+      background-position:
+        center center,
+        center center,
+        0 var(--scan-y);
+      background-repeat: no-repeat, no-repeat, repeat;
+      background-blend-mode: multiply, soft-light, soft-light;
+      mix-blend-mode: normal;
+      opacity: .62;
+      animation: 
+        crt-flicker 1.8s linear infinite,
+        crt-jitter 1.8s steps(40,end) infinite 0.06s;
+        scan-roll 0.8s linear infinite var(--crt-delay, 0s),
+        scan-wobble 3.6s ease-in-out infinite var(--crt-delay, 0s),
+        <!-- scan-drop 9s steps(1,end) infinite var(--crt-delay, 0s); -->
+    }
+
+    .project-card.crt::after {
+      content:"";
+      position: absolute; inset: 0;
+      pointer-events:none; 
+      z-index: 3;
+      border-radius: inherit;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,60,60,.22) 0 1px,
+          rgba(60,255,60,.22) 1px 2px,
+          rgba(60,140,255,.22) 2px 3px,
+          transparent 3px 5px
+        );
+      mix-blend-mode: overlay;
+      opacity: .42;
+      animation: crt-jitter 1.8s steps(40,end) infinite 0.06s;
+    }
+
+    @keyframes crt-flicker {
+      0% { opacity: .58; filter: brightness(0.98); }
+      8% { opacity: .62; filter: brightness(1.00); }
+      17% { opacity: .56; filter: brightness(0.99); }
+      29% { opacity: .64; filter: brightness(1.01); }
+      41% { opacity: .59; filter: brightness(0.985); }
+      55% { opacity: .66; filter: brightness(1.015); }
+      72% { opacity: .60; filter: brightness(1.00); }
+      86% { opacity: .63; filter: brightness(0.99); }
+      100% { opacity: .58; filter: brightness(0.985); }
+    }
+
+    @keyframes scan-roll {
+      to { --scan-y: 8px; }
+    }
+
+    @keyframes scan-wobble {
+      0% { --scan-angle: 0deg; }
+      25% { --scan-angle: 0.35deg; }
+      50% { --scan-angle: -0.25deg; }
+      75% { --scan-angle: 0.20deg; }
+      100% { --scan-angle: 0deg; }
+    }
+
+    @keyframes scan-drop {
+      0%, 86% { }
+      87% { --scan-y: calc(var(--scan-y) + 40px); }
+      88%, 100% { --scan-y: 0px; }
+    }
+
+    @keyframes crt-jitter {
+      0% { transform: translate(0px, 0); }
+      12% { transform: translate(0.6px, 0); }
+      28% { transform: translate(-0.8px, 0); }
+      47% { transform: translate(0.4px, 0); }
+      63% { transform: translate(-0.6px, 0); }
+      82% { transform: translate(0.3px, 0); }
+      100% { transform: translate(0px, 0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .project-card.crt::before,
+      .project-card.crt::after { animation: none; }
+    }
+
     h1 {
       color: #8A3CF0;
       font-size: 2.5em;
@@ -372,7 +492,6 @@
       background-clip: padding-box, border-box;
       border-radius: 2px;
       border: 2px solid transparent;
-      background
       color: #fffffe;
       text-decoration: none;
       overflow: hidden;
@@ -445,7 +564,7 @@
     /* 2-column shell */
     .layout {
       display: grid;
-      grid-template-columns: 50vw 50vw;
+      grid-template-columns: 40vw 60vw;
       gap: 0;
       align-items: start;
     }
@@ -590,114 +709,114 @@
   </style>
 </head>
 <body>
-  <div id="fireflies" aria-hidden="true"></div>
-  <main class="layout">
-    <section class="scroll-section scroll-section--hero">
-      <div class="hero-stack">
-        <div class="text-stack">
-          <div class="hello-text-stack">
-            <p class="hello-text" id="blinkingElement">></p>
-            <p class="hello-text">Hello, my name is</p>
-          </div>
-          <h1 class="name-text">Stephen Ristow</h1>
-          <p class="tagline-text">I'm a developer building full-stack web applications.</p>
-        </div>
-        <div class="social-cta-row">
-          <a class="btn-cta" href="https://github.com/stephenristow" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-github" aria-hidden="true"></i>
-            <span>GitHub</span>
-          </a>
-          <a class="btn-cta" href="https://www.linkedin.com/in/stephenristow" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
-            <span>LinkedIn</span>
-          </a>
-          <a href="./assets/resume-dev.pdf" download="StephenRistow_resume.pdf" class="btn-cta">
-            <i class="fa-solid fa-download" aria-hidden="true"></i>
-            <span>Resume</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <aside class="projects" aria-label="Projects list">
-      <h2 class="rail-title">Projects</h2>
-      <ul class="rail-list stack-12">
-        <li class="rail-card">
-          <article class="project-card">
-            <h3 class="project-title">
-              <a class="stretched-link" href="https://pawsport-production.up.railway.app/" target="_blank" rel="noopener noreferrer">
-                PawsPort — a social network for dog owners
-              </a>
-            </h3>
-            <time class="project-date" datetime="2024-12" aria-label:"December 2024 to present">Dec 2024 — Present</time>
-            <p>
-              A social web app where dog owners set up pet profiles, and connect with other dog owners.
-              Built with Django and MySQL, styled with HTML/CSS; containerized and deployed using Docker (Kubernetes) and Railway.
-            </p>
-            <ul class="tech-chips tech-chips--dot">
-              <li data-cat="lang">Python</li>
-              <li data-cat="fw">Django</li>
-              <li data-cat="db">MySQL</li>
-              <li data-cat="lang">HTML</li>
-              <li data-cat="lang">CSS</li>
-              <li data-cat="devops">Docker</li>
-              <li data-cat="devops">Kubernetes</li>
-            </ul>
-            <div class="actions">
-              <a class="btn-cta" href="https://github.com/stephenristow/pawsport" target="_blank" rel="noopener noreferrer" aria-label="View PawsPort source code on GitHub">
-                Source Code
-              </a>
+    <div id="fireflies" aria-hidden="true"></div>
+    <main class="layout">
+      <section class="scroll-section scroll-section--hero">
+        <div class="hero-stack">
+          <div class="text-stack">
+            <div class="hello-text-stack">
+              <p class="hello-text" id="blinkingElement">></p>
+              <p class="hello-text">Hello, my name is</p>
             </div>
-          </article>
-        </li>
-      </ul>
+            <h1 class="name-text">Stephen Ristow</h1>
+            <p class="tagline-text">I'm a developer building full-stack web applications.</p>
+          </div>
+          <div class="social-cta-row">
+            <a class="btn-cta" href="https://github.com/stephenristow" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-github" aria-hidden="true"></i>
+              <span>GitHub</span>
+            </a>
+            <a class="btn-cta" href="https://www.linkedin.com/in/stephenristow" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+              <span>LinkedIn</span>
+            </a>
+            <a href="./assets/resume-dev.pdf" download="StephenRistow_resume.pdf" class="btn-cta">
+              <i class="fa-solid fa-download" aria-hidden="true"></i>
+              <span>Resume</span>
+            </a>
+          </div>
+        </div>
+      </section>
 
-      <ul class="rail-list stack-12">
-        <li class="rail-card">
-          <article class="project-card">
-            <h3 class="project-title">
-              <a href="https://github.com/stephenristow/gotchatama" target="_blank" rel="noopener noreferrer">
-                GotchaTama — a Tamagotchi collection tracker
-              </a>
-            </h3>
-            <p class="project-date">Jul 2025 — Present</p>
-            <p>
-              A tracking app that enables Tamagotchi enthusiasts to track which characters they have and will obtain.
-              Built with React Native, using TypeScript, styled with CSS; deployed using Expo Router.
-            </p>
-            <ul class="tech-chips tech-chips--dot">
-              <li data-cat="lang">TypeScript</li>
-              <li data-cat="lang">CSS</li>
-              <li data-cat="fw">React Native</li>
-            </ul>
-          </article>
-        </li>
-        <li class="rail-card">
-          <article class="project-card">
-            <h3 class="project-title">
-              <a href="https://github.com/stephenristow/Gymothy" target="_blank" rel="noopener noreferrer">
-                Gymothy — a workout tracker for strength training
-              </a>
-            </h3>
-            <p class="project-date"></p>
-            <p>
-              An app that provides users with a strength training specialized workout tracker.
-              Built with Django and MySQL, and styled with HTML/CSS. 
-            </p>
-            <ul class="tech-chips tech-chips--dot">
-              <li data-cat="lang">Python</li>
-              <li data-cat="fw">Django</li>
-              <li data-cat="db">MySQL</li>
-              <li data-cat="lang">HTML</li>
-              <li data-cat="lang">CSS</li>
-              <li data-cat="devops">Docker</li>
-            </ul>
-          </article>
-        </li>
-      </ul>
-    </aside>
+      <aside class="projects" aria-label="Projects list">
+        <h2 class="rail-title">Projects</h2>
+        <ul class="rail-list stack-12">
+          <li class="rail-card">
+            <article class="project-card crt">
+              <h3 class="project-title">
+                <a href="https://github.com/stephenristow/gotchatama" target="_blank" rel="noopener noreferrer">
+                  GotchaTama — a Tamagotchi collection tracker
+                </a>
+              </h3>
+              <p class="project-date">Jul 2025 — Present</p>
+              <p>
+                A tracking app that enables Tamagotchi enthusiasts to track which characters they have and will obtain.
+                Built with React Native, using TypeScript, styled with CSS; deployed using Expo Router.
+              </p>
+              <ul class="tech-chips tech-chips--dot">
+                <li data-cat="lang">TypeScript</li>
+                <li data-cat="lang">CSS</li>
+                <li data-cat="fw">React Native</li>
+              </ul>
+            </article>
+          </li>
+          <li class="rail-card">
+            <article class="project-card crt">
+              <h3 class="project-title">
+                <a class="stretched-link" href="https://pawsport-production.up.railway.app/" target="_blank" rel="noopener noreferrer">
+                  PawsPort — a social network for dog owners
+                </a>
+              </h3>
+              <time class="project-date" datetime="2024-12" aria-label:"December 2024 to present">Dec 2024 — Present</time>
+              <p>
+                A social web app where dog owners set up pet profiles, and connect with other dog owners.
+                Built with Django and MySQL, styled with HTML/CSS; containerized and deployed using Docker (Kubernetes) and Railway.
+              </p>
+              <ul class="tech-chips tech-chips--dot">
+                <li data-cat="lang">Python</li>
+                <li data-cat="fw">Django</li>
+                <li data-cat="db">MySQL</li>
+                <li data-cat="lang">HTML</li>
+                <li data-cat="lang">CSS</li>
+                <li data-cat="devops">Docker</li>
+                <li data-cat="devops">Kubernetes</li>
+              </ul>
+              <div class="actions">
+                <a class="btn-cta" href="https://github.com/stephenristow/pawsport" target="_blank" rel="noopener noreferrer" aria-label="View PawsPort source code on GitHub">
+                  Source Code
+                </a>
+              </div>
+            </article>
+          </li>
+        </ul>
 
-  </main>
+        <ul class="rail-list stack-12">
+          <li class="rail-card">
+            <article class="project-card crt">
+              <h3 class="project-title">
+                <a href="https://github.com/stephenristow/Gymothy" target="_blank" rel="noopener noreferrer">
+                  Gymothy — a workout tracker for strength training
+                </a>
+              </h3>
+              <p class="project-date"></p>
+              <p>
+                An app that provides users with a strength training specialized workout tracker.
+                Built with Django and MySQL, and styled with HTML/CSS. 
+              </p>
+              <ul class="tech-chips tech-chips--dot">
+                <li data-cat="lang">Python</li>
+                <li data-cat="fw">Django</li>
+                <li data-cat="db">MySQL</li>
+                <li data-cat="lang">HTML</li>
+                <li data-cat="lang">CSS</li>
+                <li data-cat="devops">Docker</li>
+              </ul>
+            </article>
+          </li>
+        </ul>
+      </aside>
+
+    </main>
 </body>
 </html>
 
@@ -826,6 +945,11 @@
   document.addEventListener('mousemove', onMove, { passive: true });
   window.addEventListener('resize', () => { if (!raf) raf = requestAnimationFrame(update); });
   update(); // initial paint
+
+  document.querySelectorAll('.project-card.crt').forEach((el) => {
+    const delay = -(Math.random() * 3).toFixed(2) + 's';
+    el.style.setProperty('--crt-delay', delay);
+  });
 
 
 </script>
