@@ -93,6 +93,39 @@ function cursorBlinking(elementId, intervalTime) {
 }
 const myBlinkInterval = cursorBlinking('blinkingElement', 677);
 
+// function animatingText(elementId) {
+//   const element = document.getElementById(elementId);
+//   const parentElement = document.getElementById('helloTextStack');
+//   let animateText = element.textContent;
+//
+//   for (let i = 0; i < animateText.length; i++) {
+//     const newText = document.createElement("p");
+//     const textNode = document.createTextNode(animateText[i]);
+//     newText.appendChild(textNode);
+//     newText.setAttribute("class", "hello-text-animated");
+//     parentElement.appendChild(newText);
+//   }
+// }
+//
+// const myAnimatingText = animatingText('animatingTextElement');
+const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function animatingText(el, text, { speed = 55, jitter = 45, startDelay = 0, onDone } = {}) {
+
+  if (prefersReducedMotion) { el.textContent = text; onDone?.(); return; };
+  let i = 0;
+  function tick() {
+    el.textContent = text.slice(0, i++);
+    if (i <= text.length) {
+      const delay = speed + Math.random() * jitter;
+      setTimeout(tick, delay);
+    } else { onDone?.(); }
+  }
+  setTimeout(tick, startDelay);
+}
+
+const animatedTextElement = document.getElementById('animatingTextElement');
+animatingText(animatedTextElement, "Hello, my name is", { speed: 60, jitter: 50 });
 
 const root = document.documentElement;
 let lastX = window.innerWidth / 2, lastY = window.innerHeight / 2;

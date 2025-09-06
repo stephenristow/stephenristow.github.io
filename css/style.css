@@ -230,6 +230,14 @@
       margin-right: 8px;
     }
 
+    .hello-text-animated {
+      font-family: 'VT323', monospace;
+      font-size: 1.6em;
+      color: #94a1b2;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
     .intro-text {
       font-family: 'Mononoki';
       font-size: 1.5em;
@@ -348,7 +356,7 @@
       border-radius: 2px;
       border: 2px solid transparent;
       color: #fffffe;
-      opacity: 0.6;
+      opacity: 0.8;
       text-decoration: none;
       overflow: hidden;
       transition: box-shadow .15s linear;
