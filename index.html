@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="macchiato" lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,8 +24,9 @@
         <div class="hero-stack">
           <div class="text-stack">
             <div class="hello-text-stack" id="helloTextStack">
-              <p class="hello-text" id="blinkingElement">></p>
+              <p class="hello-text terminal">stephenristow@Stephens-mbp ~ </p>
               <p class="hello-text" id="animatingTextElement"></p>
+              <p class="hello-text cursor solid" id="blinkingElement">|</p>
             </div>
             <h1 class="name-text">Stephen Ristow</h1>
             <p class="tagline-text">I'm a developer building full-stack web applications.</p>
@@ -52,27 +53,30 @@
         <ul class="rail-list stack-12">
           <li class="rail-card">
             <article class="project-card">
-              <div class="project-card-overlay"></div>
               <h3 class="project-title">
-                <a href="https://github.com/stephenristow/gotchatama" target="_blank" rel="noopener noreferrer">
-                  GotchaTama — a Tamagotchi collection tracker
-                </a>
+                <!-- <a href="https://github.com/stephenristow/gotchatama" target="_blank" rel="noopener noreferrer"> -->
+                GotchaTama — a Tamagotchi collection tracker
+                <!-- </a> -->
               </h3>
               <p class="project-date">Jul 2025 — Present</p>
               <p>
                 A tracking app that enables Tamagotchi enthusiasts to track which characters they have and will obtain.
                 Built with React Native, using TypeScript, styled with CSS; deployed using Expo Router.
               </p>
-              <ul class="tech-chips tech-chips--dot">
-                <li data-cat="lang">TypeScript</li>
-                <li data-cat="lang">CSS</li>
-                <li data-cat="fw">React Native</li>
-              </ul>
+              <div class="project-card-bottom-row">
+                <ul class="tech-chips tech-chips--dot">
+                  <li data-cat="lang">TypeScript</li>
+                  <li data-cat="lang">CSS</li>
+                  <li data-cat="fw">React Native</li>
+                </ul>
+                <a class="app-store-cta" href="https://apps.apple.com/ca/app/gotchatama/id6749816784">
+                  <img src="./assets/images/app_store_US-UK_white.svg" alt="App Store Download White">
+                </a>
+              </div>
             </article>
           </li>
           <li class="rail-card">
             <article class="project-card">
-              <div class="project-card-overlay"></div>
               <h3 class="project-title">
                 <a class="stretched-link" href="https://pawsport-production.up.railway.app/" target="_blank" rel="noopener noreferrer">
                   PawsPort — a social network for dog owners
@@ -99,7 +103,6 @@
         <ul class="rail-list stack-12">
           <li class="rail-card">
             <article class="project-card">
-              <div class="project-card-overlay"></div>
               <h3 class="project-title">
                 <a href="https://github.com/stephenristow/Gymothy" target="_blank" rel="noopener noreferrer">
                   Gymothy — a workout tracker for strength training

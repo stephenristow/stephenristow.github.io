@@ -91,41 +91,50 @@ function cursorBlinking(elementId, intervalTime) {
 
   return blinkInterval;
 }
-const myBlinkInterval = cursorBlinking('blinkingElement', 677);
 
-// function animatingText(elementId) {
-//   const element = document.getElementById(elementId);
-//   const parentElement = document.getElementById('helloTextStack');
-//   let animateText = element.textContent;
-//
-//   for (let i = 0; i < animateText.length; i++) {
-//     const newText = document.createElement("p");
-//     const textNode = document.createTextNode(animateText[i]);
-//     newText.appendChild(textNode);
-//     newText.setAttribute("class", "hello-text-animated");
-//     parentElement.appendChild(newText);
-//   }
-// }
-//
-// const myAnimatingText = animatingText('animatingTextElement');
 const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function animatingText(el, text, { speed = 55, jitter = 45, startDelay = 0, onDone } = {}) {
+async function animatingText(el, text, { speed = 55, jitter = 45, startDelay = 0 } = {}) {
+  console.log("[animatingText] start!");
+  return new Promise(resolve => {
+    if (prefersReducedMotion) {
+      el.textContent = text;
+      console.log("[animatingText] PRM true -> resolve immediately!");
+      resolve();
+      return;
+    }
 
-  if (prefersReducedMotion) { el.textContent = text; onDone?.(); return; };
-  let i = 0;
-  function tick() {
-    el.textContent = text.slice(0, i++);
-    if (i <= text.length) {
-      const delay = speed + Math.random() * jitter;
-      setTimeout(tick, delay);
-    } else { onDone?.(); }
-  }
-  setTimeout(tick, startDelay);
+    let i = 0;
+    const tick = () => {
+      el.textContent = text.slice(0, i++);
+      if (i <= text.length) {
+        const delay = speed + Math.floor(Math.random() * jitter);
+        setTimeout(tick, delay);
+      } else {
+        console.log("[animatingText-tick] All done typing!");
+        resolve();
+      }
+    };
+    setTimeout(tick, startDelay);
+  });
 }
 
-const animatedTextElement = document.getElementById('animatingTextElement');
-animatingText(animatedTextElement, "Hello, my name is", { speed: 60, jitter: 50 });
+function startCursorBlink(cursorEl) {
+  cursorEl.classList.remove('solid');
+  cursorEl.classList.add('blink');
+}
+
+(async () => {
+  const textEl = document.getElementById('animatingTextElement');
+  const cursor = document.getElementById('blinkingElement');
+
+  cursor.classList.add('solid');
+  cursor.classList.remove('blink');
+
+  await animatingText(textEl, "me -h", { speed: 60, jitter: 50 });
+
+  startCursorBlink(cursor);
+})();
 
 const root = document.documentElement;
 let lastX = window.innerWidth / 2, lastY = window.innerHeight / 2;
