@@ -131,19 +131,23 @@ function stopCursorBlink(cursorEl) {
 }
 
 (async () => {
-  const cmdEl = document.getElementById('animatingTextElement');
-  const cursorTop = document.getElementById('cursorTop');
+  const cmdEl = document.getElementById('typingTop');
+  // const cursorTop = document.getElementById('cursorTop');
   const nameEl = document.querySelector('.name-text');
   const taglineEl = document.querySelector('.tagline-text');
   const termEl = document.getElementById('terminalTextStack');
   const cursorBottom = document.getElementById('cursorBottom');
 
+  function setCursorState(state) { typingTop.dataset.cursor = state; }
 
-  stopCursorBlink(cursorTop);
+  setCursorState('solid');
+
+  // stopCursorBlink(cursorTop);
 
   await animatingText(cmdEl, "me -h", { speed: 60, jitter: 50 });
 
   await sleep(250);
+
 
   const nameText = nameEl.textContent;
   const tagText = taglineEl.textContent;
@@ -153,7 +157,8 @@ function stopCursorBlink(cursorEl) {
   await animatingText(nameEl, nameText, { speed: 28, jitter: 18 });
   await animatingText(taglineEl, tagText, { speed: 28, jitter: 14 });
 
-  cursorTop.style.visibility = 'hidden';
+  // cursorTop.style.visibility = 'hidden';
+  setCursorState('hidden');
 
   termEl.classList.remove('hidden');
 

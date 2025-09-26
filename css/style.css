@@ -22,7 +22,7 @@
   @font-face {
     font-family: "Caskaydia";
     src: url("../assets/fonts/caskaydia/CaskaydiaCoveNerdFontMono-Regular.woff2") format("woff2");
-    font-weight: 100;
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
@@ -343,15 +343,47 @@
     margin-bottom: 0;
   }
 
+  #typingTop {
+    white-space: pre;
+  }
+
+  #typingTop::after {
+    content: "";
+    display: inline-block;
+    width: 1ch;
+    height: 1lh;
+    background: var(--ctp-text);
+    vertical-align: -0.1em;
+  }
+
+  #typingTop[data-cursor="solid"]::after {
+    opacity: 1;
+    animation: none;
+  }
+
+  #typingTop[data-cursor="blink"]::after {
+    animation: blink 1s steps(1, end) infinite;
+  }
+
+  #typingTop[data-cursor="hidden"]::after {
+    content: none;
+  }
+
+  @supports not (height: 1lh) {
+    #typingTop::after {
+      height: 1em;
+    }
+  }
+
   .cursor {
     display: inline-block;
     width: 1ch;
-    font-family: 'Caskaydia', monospace;
-    font-size: 1em;
-    color: var(--ctp-text);
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-right: 8px;
+    height: 1em;
+    background: var(--ctp-text);
+    vertical-align: -0.1em;
+    /*margin-top: 0;*/
+    /*margin-bottom: 0;*/
+    /*margin-right: 8px;*/
   }
 
   .cursor.solid {
@@ -865,6 +897,7 @@
     }
 
     .hello-text {
+      line-height: 1;
       font-size: 1rem;
     }
 

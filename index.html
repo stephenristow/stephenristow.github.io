@@ -25,14 +25,17 @@
           <div class="text-stack">
             <div class="hello-text-stack" id="helloTextStack">
               <p class="hello-text terminal">stephen@localhost ~ </p>
-              <p class="hello-text" id="animatingTextElement"></p>
-              <p class="hello-text cursor solid" id="cursorTop">|</p>
+              <p class="hello-text" id="animatingTextElement">
+                <span id="typingTop"></span>
+                <!-- <span class="cursor solid" id="cursorTop"></span> -->
+              </p>
             </div>
             <h1 class="name-text">Stephen Ristow</h1>
             <p class="tagline-text">I'm a developer building full-stack web applications.</p>
             <div class="hello-text-stack hidden" id="terminalTextStack">
-              <p class="hello-text terminal">stephen@localhost ~ </p>
-              <p class="hello-text cursor solid" id="cursorBottom">|</p>
+              <p class="hello-text terminal">stephen@localhost ~ 
+                <span class="hello-text cursor solid" id="cursorBottom"></span>
+              </p>
             </div>
           </div>
           <div class="social-cta-row">
