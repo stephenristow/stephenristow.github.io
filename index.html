@@ -26,10 +26,14 @@
             <div class="hello-text-stack" id="helloTextStack">
               <p class="hello-text terminal">stephen@localhost ~ </p>
               <p class="hello-text" id="animatingTextElement"></p>
-              <p class="hello-text cursor solid" id="blinkingElement">|</p>
+              <p class="hello-text cursor solid" id="cursorTop">|</p>
             </div>
             <h1 class="name-text">Stephen Ristow</h1>
             <p class="tagline-text">I'm a developer building full-stack web applications.</p>
+            <div class="hello-text-stack hidden" id="terminalTextStack">
+              <p class="hello-text terminal">stephen@localhost ~ </p>
+              <p class="hello-text cursor solid" id="cursorBottom">|</p>
+            </div>
           </div>
           <div class="social-cta-row">
             <a class="btn-cta" href="https://github.com/stephenristow" target="_blank" rel="noopener noreferrer">
@@ -91,15 +95,24 @@
                 A social web app where dog owners set up pet profiles, and connect with other dog owners.
                 Built with Django and MySQL, styled with HTML/CSS; containerized and deployed using Docker (Kubernetes) and Railway.
               </p>
-              <ul class="tech-chips tech-chips--dot">
-                <li data-cat="lang">Python</li>
-                <li data-cat="fw">Django</li>
-                <li data-cat="db">MySQL</li>
-                <li data-cat="lang">HTML</li>
-                <li data-cat="lang">CSS</li>
-                <li data-cat="devops">Docker</li>
-                <li data-cat="devops">Kubernetes</li>
-              </ul>
+              <div class="project-card-bottom-row">
+                <ul class="tech-chips tech-chips--dot">
+                  <li data-cat="lang">Python</li>
+                  <li data-cat="fw">Django</li>
+                  <li data-cat="db">MySQL</li>
+                  <li data-cat="lang">HTML</li>
+                  <li data-cat="lang">CSS</li>
+                  <li data-cat="devops">Docker</li>
+                  <li data-cat="devops">Kubernetes</li>
+                </ul>
+                <a class="btn-cta btn-store" href="https://pawsport-production.up.railway.app/" target="_blank" rel="noopener noreferrer">
+                  <i class="silly-oslo" aria-hidden="true"></i>
+                  <span class="store-copy">
+                    <span class="store-top">Check out the</span>
+                    <span class="store-bottom">Live Site</span>
+                  </span>
+                </a>
+              </div>
             </article>
           </li>
         </ul>

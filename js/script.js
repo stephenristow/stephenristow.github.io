@@ -93,6 +93,7 @@ function cursorBlinking(elementId, intervalTime) {
 }
 
 const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
 async function animatingText(el, text, { speed = 55, jitter = 45, startDelay = 0 } = {}) {
   console.log("[animatingText] start!");
@@ -124,16 +125,39 @@ function startCursorBlink(cursorEl) {
   cursorEl.classList.add('blink');
 }
 
+function stopCursorBlink(cursorEl) {
+  cursorEl.classList.add('solid');
+  cursorEl.classList.remove('blink');
+}
+
 (async () => {
-  const textEl = document.getElementById('animatingTextElement');
-  const cursor = document.getElementById('blinkingElement');
+  const cmdEl = document.getElementById('animatingTextElement');
+  const cursorTop = document.getElementById('cursorTop');
+  const nameEl = document.querySelector('.name-text');
+  const taglineEl = document.querySelector('.tagline-text');
+  const termEl = document.getElementById('terminalTextStack');
+  const cursorBottom = document.getElementById('cursorBottom');
 
-  cursor.classList.add('solid');
-  cursor.classList.remove('blink');
 
-  await animatingText(textEl, "me -h", { speed: 60, jitter: 50 });
+  stopCursorBlink(cursorTop);
 
-  startCursorBlink(cursor);
+  await animatingText(cmdEl, "me -h", { speed: 60, jitter: 50 });
+
+  await sleep(250);
+
+  const nameText = nameEl.textContent;
+  const tagText = taglineEl.textContent;
+  nameEl.textContent = '';
+  taglineEl.textContent = '';
+
+  await animatingText(nameEl, nameText, { speed: 28, jitter: 18 });
+  await animatingText(taglineEl, tagText, { speed: 28, jitter: 14 });
+
+  cursorTop.style.visibility = 'hidden';
+
+  termEl.classList.remove('hidden');
+
+  startCursorBlink(cursorBottom);
 })();
 
 const root = document.documentElement;
