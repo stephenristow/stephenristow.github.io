@@ -33,6 +33,29 @@
     overflow-y: scroll;
   }
 
+  html,
+  body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  .projects {
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .projects::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
   #fireflies {
     position: fixed;
     inset: 0;
@@ -609,6 +632,53 @@
     transform: translate(calc(-.5*var(--jump)), calc(-.5*var(--jump)));
   }
 
+  .btn-cta.btn-store {
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-auto-columns: auto 1fr;
+    align-items: center;
+    column-gap: .6rem;
+    padding: .55rem .8rem;
+
+    background: var(--ctp-crust);
+    color: var(--ctp-text);
+    border: 1px solid var(--ctp-surface1);
+    border-radius: 8px;
+    text-decoration: none;
+    min-height: 44px;
+    line-height: 1;
+  }
+
+  .btn-cta.btn-store:hover {
+    background: var(--ctp-surface1);
+    border-color: var(--ctp-text);
+    box-shadow: 0 0 0 0;
+  }
+
+  .btn-cta .fa-brands.fa-apple {
+    width: 22px;
+    height: 22px;
+    display: block;
+    fill: currentColor;
+  }
+
+  .btn-cta .store-copy {
+    display: grid;
+    line-height: 1.05;
+  }
+
+  .btn-cta .store-top {
+    font-size: .72rem;
+    letter-spacing: .015rem;
+    opacity: .85;
+  }
+
+  .btn-cta .store-bottom {
+    font-size: 1.12rem;
+    font-weight: 700;
+    letter-spacing: .01em;
+  }
+
   .resume-grid {
     display: flex;
     flex-wrap: wrap;
@@ -743,6 +813,131 @@
       width: 200%;
       height: 200%;
       opacity: 0;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .layout {
+      grid-template-columns: 1fr;
+      row-gap: 2rem;
+      margin: 0 auto;
+      padding-inline: 16px;
+    }
+
+    .projects {
+      position: static;
+      max-height: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .scroll-section {
+      padding: 48px 16px;
+    }
+
+    .hero-stack {
+      height: auto;
+      gap: 12px;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .name-text {
+      font-size: clamp(2rem, 5vw, 3rem);
+    }
+
+    .tagline-text {
+      font-size: clamp(1rem, 3.5vw, 1.25rem);
+    }
+
+    .hello-text {
+      font-size: 1rem;
+    }
+
+    .social-cta-row {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn-cta {
+      font-size: 1rem;
+      padding: .5rem .8rem;
+    }
+
+    .project-card-bottom-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .project-card-bottom-row .tech-chips {
+      margin: 0;
+    }
+
+    .project-card-bottom-row img {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .btn-cta {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .tech-chips {
+      gap: .35rem;
+    }
+
+    .tech-chips--dot li {
+      font-size: .78rem;
+      padding: .16rem .45rem .16rem .38rem;
+    }
+
+    .btn-cta.btn-store {
+      width: 100%;
+      justify-content: center;
+      column-gap: .5rem;
+    }
+
+    .btn-cta .fa-brands.fa-apple {
+      width: 20px;
+      height: 20px;
+    }
+
+    .btn-cta .store-bottom {
+      font-size: 1.05rem;
+    }
+  }
+
+  @media (hover:hover) and (pointer:fine) {
+    .btn-cta:hover {
+      transform: translate(calc(-1*var(--jump)), calc(-1*var(--jump)));
+      background-color: var(--ctp-teal);
+      box-shadow: var(--jump) var(--jump) 0 0 var(--ctp-text);
+      border-color: var(--ctp-text);
+    }
+
+    .project-card:hover {
+      transform: scale(1.02);
+      animation: border-sweep 1.6s linear infinite;
+      box-shadow: 0 0 10px color-mix(in srgb, var(--ctp-blue) 35%, transparent);
+    }
+  }
+
+  @media (max-width: 640px),
+  (prefers-reduced-motion: reduce) {
+    #fireflies {
+      display: none;
     }
   }
 
