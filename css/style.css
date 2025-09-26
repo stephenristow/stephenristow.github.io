@@ -351,7 +351,7 @@
     content: "";
     display: inline-block;
     width: 1ch;
-    height: 1lh;
+    height: 1em;
     background: var(--ctp-text);
     vertical-align: -0.1em;
   }
