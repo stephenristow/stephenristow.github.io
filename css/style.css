@@ -45,6 +45,24 @@
     height: 0;
   }
 
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'>\<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/>\<feColorMatrix type='saturate' values='0'/>\</filter><rect width='120' height='120' filter='url(%23n)' opacity='0.12'/></svg>") repeat;
+    mix-blend-mode: soft-light;
+    opacity: 0.4;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body::after {
+      opacity: 0.32;
+    }
+  }
+
   .projects {
     overflow-y: auto;
     -ms-overflow-style: none;
@@ -274,6 +292,15 @@
     justify-content: center;
     padding: 80px 40px;
     background-color: var(--ctp-base);
+  }
+
+  .social-bottom-row {
+    justify-items: start;
+  }
+
+  .credits {
+    font-size: 0.7em;
+    color: var(--ctp-subtext1);
   }
 
   .social-cta-row {
@@ -981,6 +1008,11 @@
   }
 
   @media (hover:hover) and (pointer:fine) {
+    .project-card {
+      transform-style: preserve-3d;
+      transition: transform 0.12s ease;
+    }
+
     .btn-cta:hover {
       transform: translate(calc(-1*var(--jump)), calc(-1*var(--jump)));
       background-color: var(--ctp-teal);
@@ -989,7 +1021,7 @@
     }
 
     .project-card:hover {
-      transform: scale(1.02);
+      transform: translateY(-2px) perspective(800px) rotateX(1deg) rotateY(0.8deg);
       animation: border-sweep 1.6s linear infinite;
       box-shadow: 0 0 10px color-mix(in srgb, var(--ctp-blue) 35%, transparent);
     }
