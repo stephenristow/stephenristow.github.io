@@ -1021,7 +1021,8 @@
     }
 
     .project-card:hover {
-      transform: translateY(-2px) perspective(800px) rotateX(1deg) rotateY(0.8deg);
+      transform: translate(1.02);
+      /* translateY(-2px) perspective(800px) rotateX(1deg) rotateY(0.8deg); */
       animation: border-sweep 1.6s linear infinite;
       box-shadow: 0 0 10px color-mix(in srgb, var(--ctp-blue) 35%, transparent);
     }
